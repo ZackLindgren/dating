@@ -1,0 +1,12 @@
+{
+  "name": "zlindgren/it328/dating",
+  "authors": [
+    {
+      "name": "Zack Lindgren",
+      "email": "zlindgren@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
