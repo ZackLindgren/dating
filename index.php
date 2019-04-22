@@ -47,5 +47,42 @@ $f3 ->route('POST /signup2', function() {
     echo $view ->render('views/form2.html');
 });
 
+//Define the route to the third part of the form
+$f3 ->route('POST /signup3', function() {
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['region'] = $_POST['region'];
+    $_SESSION['seeking'] = $_POST['seeking'];
+    $_SESSION['bio'] = $_POST['bio'];
+
+    $view = new Template();
+    echo $view ->render('views/form3.html');
+});
+
+//Define the route to the summary
+$f3 ->route('POST /summary', function() {
+    $indoor = array();
+    $indoor[] = $_POST['tv'];
+    $indoor[] = $_POST['movies'];
+    $indoor[] = $_POST['cooking'];
+    $indoor[] = $_POST['cards'];
+    $indoor[] = $_POST['puzzles'];
+    $indoor[] = $_POST['reading'];
+    $indoor[] = $_POST['contests'];
+    $indoor[] = $_POST['videogames'];
+    $_SESSION['indoor'] = $indoor;
+
+    $outdoor = array();
+    $outdoor[] = $_POST['hiking'];
+    $outdoor[] = $_POST['running'];
+    $outdoor[] = $_POST['swimming'];
+    $outdoor[] = $_POST['battling'];
+    $outdoor[] = $_POST['training'];
+    $outdoor[] = $_POST['climbing'];
+    $_SESSION['outdoor'] = $indoor;
+
+    $view = new Template();
+    echo $view ->render('views/summary.html');
+});
+
 //Run fat free
 $f3 ->run();
