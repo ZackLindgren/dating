@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--
+        Zachary Lindgren
+        4/21/19
+        summary.html
+        The summary page for the Pokemon Dating website
+    -->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokemon Dating: Summary</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+<!-- The navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/it328/dating/"><h4>Luvdisc Dating</h4></a>
+</nav>
+
+<!-- The main page -->
+<div class="rounded card-group m-3">
+
+    <div class="card border-right-0">
+        <div class="card-body">
+            <div class="border rounded m-3">
+                <p class="border-bottom pt-3 pb-3">Name: {{@SESSION.name}}</p>
+                <p class="border-bottom pb-3">Gender: {{@SESSION.gender}}</p>
+                <p class="border-bottom pb-3">Age: {{@SESSION.age}}</p>
+                <p class="border-bottom pb-3">Phone: {{@SESSION.number}}</p>
+                <p class="border-bottom pb-3">Email: {{@SESSION.email}}</p>
+                <p class="border-bottom pb-3">Region: {{@SESSION.region}}</p>
+                <p class="border-bottom pb-3">Seeking: {{@SESSION.seeking}}</p>
+                <p>Interests: {{@SESSION.indoor}} {{@SESSION.outdoor}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <img src="images/avatar.png" class="rounded w-50 d-block mx-auto" alt="Avatar">
+            <h4>Biography</h4>
+            <p>{{@SESSION.bio}}</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary d-block mx-auto">Contact Me!</button>
+    </div>
+</div>
+
+
+<!-- JavaScript for the Bootstrap 4 -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
