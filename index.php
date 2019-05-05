@@ -14,14 +14,18 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-//Require the autoload file
+//Require the autoload file & model
 require_once('vendor/autoload.php');
+require_once('model/validation.php');
 
 //Create an instance of the Base class
 $f3 = Base::instance();
 
 // Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);
+
+// Setting arrays
+$f3->set('genders', array('Male', 'Female'));
 
 //Define a default route
 $f3 ->route('GET /', function() {
@@ -30,18 +34,41 @@ $f3 ->route('GET /', function() {
 });
 
 //Define the route to the start of the form
-$f3 ->route('POST /signup', function() {
+$f3 ->route('POST /signup', function($f3) {
+
+    if(!empty($_POST))
+    {
+        $name = $_POST['name'];
+        $species = $_POST['species'];
+        $age = $_POST['age'];
+        $gender = $_POST['gender'];
+        $number = $_POST['number'];
+
+        $f3->set('name', $name);
+        $f3->set('species', $species);
+        $f3->set('age', $age);
+        $f3->set('gender', $gender);
+        $f3->set('number', $number);
+
+        if(validForm1())
+        {
+            $_SESSION['name'] = $name;
+            $_SESSION['species'] = $species;
+            $_SESSION['age'] = $age;
+            $_SESSION['gender'] = $gender;
+            $_SESSION['number'] = $number;
+
+            $f3->reroute('signup2');
+        }
+    }
+
     $view = new Template();
     echo $view ->render('views/form1.html');
 });
 
 //Define the route to the second part of the form
-$f3 ->route('POST /signup2', function() {
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['species'] = $_POST['species'];
-    $_SESSION['age'] = $_POST['age'];
-    $_SESSION['gender'] = $_POST['gender'];
-    $_SESSION['number'] = $_POST['number'];
+$f3 ->route('GET|POST /signup2', function() {
+
 
     $view = new Template();
     echo $view ->render('views/form2.html');
