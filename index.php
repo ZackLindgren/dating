@@ -26,6 +26,7 @@ $f3->set('DEBUG', 3);
 
 // Setting arrays
 $f3->set('genders', array('Male', 'Female'));
+$f3->set('regions', array('Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola'));
 
 //Define a default route
 $f3 ->route('GET /', function() {
@@ -67,15 +68,37 @@ $f3 ->route('POST /signup', function($f3) {
 });
 
 //Define the route to the second part of the form
-$f3 ->route('GET|POST /signup2', function() {
+$f3 ->route('GET|POST /signup2', function($f3) {
 
+    if(!empty($_POST))
+    {
+        $email = $_POST['email'];
+        $region = $_POST['region'];
+        $seeking = $_POST['seeking'];
+        $bio = $_POST['bio'];
+
+        $f3->set('email', $email);
+        $f3->set('region', $region);
+        $f3->set('seeking', $seeking);
+        $f3->set('bio', $bio);
+
+        if(validForm2())
+        {
+            $_SESSION['email'] = $email;
+            $_SESSION['region'] = $region;
+            $_SESSION['seeking'] = $seeking;
+            $_SESSION['bio'] = $bio;
+
+            $f3->reroute('signup3');
+        }
+    }
 
     $view = new Template();
     echo $view ->render('views/form2.html');
 });
 
 //Define the route to the third part of the form
-$f3 ->route('POST /signup3', function() {
+$f3 ->route('GET|POST /signup3', function() {
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['region'] = $_POST['region'];
     $_SESSION['seeking'] = $_POST['seeking'];

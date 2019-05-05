@@ -37,6 +37,22 @@ function validForm1()
     return $isValid;
 }
 
+// returns true if all the data in form 2 is valid
+function validForm2()
+{
+    global $f3;
+    $isValid = true;
+
+    // checking the email
+    if (!validEmail($f3->get('email')))
+    {
+        $isValid = false;
+        $f3->set("errors['email']", 'Please enter a valid email address');
+    }
+
+    return $isValid;
+}
+
 // returns true if the name is all alphabetic
 function validName($name)
 {
@@ -60,4 +76,10 @@ function validPhone($number)
 
     // number must be numeric, and must be 10 digits long (ignoring international numbers)
     return ctype_digit($number) && strlen($number) == 10;
+}
+
+// returns true if the email is valid
+function validEmail($email)
+{
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
