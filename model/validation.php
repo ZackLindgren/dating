@@ -53,6 +53,29 @@ function validForm2()
     return $isValid;
 }
 
+// returns true if all the data in form 3 is valid
+function validForm3()
+{
+    global $f3;
+    $isValid = true;
+
+    // checking the indoor activities
+    if (!validIndoor($f3->get('indoor')))
+    {
+        $isValid = false;
+        $f3->set("errors['indoor']", 'Please select valid indoor activities');
+    }
+
+    // checking the outdoor activities
+    if (!validOutdoor($f3->get('outdoor')))
+    {
+        $isValid = false;
+        $f3->set("errors['outdoor']", 'Please select valid outdoor activities');
+    }
+
+    return $isValid;
+}
+
 // returns true if the name is all alphabetic
 function validName($name)
 {
@@ -82,4 +105,36 @@ function validPhone($number)
 function validEmail($email)
 {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+// returns true if the array of indoor activities are valid
+function validIndoor($indoor)
+{
+    global $f3;
+
+    foreach ($indoor as $activity)
+    {
+        if (!in_array($activity, $f3->get('indoorRow1')) && !in_array($activity, $f3->get('indoorRow2')))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// returns true if the array of outdoor activities are valid
+function validOutdoor($outdoor)
+{
+    global $f3;
+
+    foreach ($outdoor as $activity)
+    {
+        if (!in_array($activity, $f3->get('outdoorRow1')) && !in_array($activity, $f3->get('outdoorRow2')))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }

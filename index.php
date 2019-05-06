@@ -27,6 +27,10 @@ $f3->set('DEBUG', 3);
 // Setting arrays
 $f3->set('genders', array('Male', 'Female'));
 $f3->set('regions', array('Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola'));
+$f3->set('indoorRow1', array('TV', 'Movies', 'Cooking', 'Card games'));
+$f3->set('indoorRow2', array('Puzzles', 'Reading', 'Contests', 'Video games'));
+$f3->set('outdoorRow1', array('Hiking', 'Running', 'Swimming', 'Battling'));
+$f3->set('outdoorRow2', array('Training', 'Climbing'));
 
 //Define a default route
 $f3 ->route('GET /', function() {
@@ -98,37 +102,31 @@ $f3 ->route('GET|POST /signup2', function($f3) {
 });
 
 //Define the route to the third part of the form
-$f3 ->route('GET|POST /signup3', function() {
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['region'] = $_POST['region'];
-    $_SESSION['seeking'] = $_POST['seeking'];
-    $_SESSION['bio'] = $_POST['bio'];
+$f3 ->route('GET|POST /signup3', function($f3) {
+
+    if(!empty($_POST))
+    {
+        $indoor = $_POST['indoor'];
+        $outdoor = $_POST['outdoor'];
+
+        $f3->set('indoor', $indoor);
+        $f3->set('outdoor', $outdoor);
+
+        if(validForm3())
+        {
+            $_SESSION['indoor'] = $indoor;
+            $_SESSION['outdoor'] = $outdoor;
+
+            $f3->reroute('summary');
+        }
+    }
 
     $view = new Template();
     echo $view ->render('views/form3.html');
 });
 
 //Define the route to the summary
-$f3 ->route('POST /summary', function() {
-    $indoor = array();
-    $indoor[] = $_POST['tv'];
-    $indoor[] = $_POST['movies'];
-    $indoor[] = $_POST['cooking'];
-    $indoor[] = $_POST['cards'];
-    $indoor[] = $_POST['puzzles'];
-    $indoor[] = $_POST['reading'];
-    $indoor[] = $_POST['contests'];
-    $indoor[] = $_POST['videogames'];
-    $_SESSION['indoor'] = $indoor;
-
-    $outdoor = array();
-    $outdoor[] = $_POST['hiking'];
-    $outdoor[] = $_POST['running'];
-    $outdoor[] = $_POST['swimming'];
-    $outdoor[] = $_POST['battling'];
-    $outdoor[] = $_POST['training'];
-    $outdoor[] = $_POST['climbing'];
-    $_SESSION['outdoor'] = $indoor;
+$f3 ->route('GET|POST /summary', function() {
 
     $view = new Template();
     echo $view ->render('views/summary.html');
