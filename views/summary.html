@@ -36,7 +36,13 @@
                 <p class="border-bottom pb-3">Email: {{@SESSION.email}}</p>
                 <p class="border-bottom pb-3">Region: {{@SESSION.region}}</p>
                 <p class="border-bottom pb-3">Seeking: {{@SESSION.seeking}}</p>
-                <p>Interests: {{@SESSION.indoor}} {{@SESSION.outdoor}}</p>
+                <p>Interests: <repeat group="{{@SESSION.indoor}}" value="{{@indoor}}">
+                        {{@indoor}},
+                    </repeat>
+                    <repeat group="{{@SESSION.outdoor}}" value="{{@outdoor}}">
+                        {{@outdoor}},
+                    </repeat>
+                </p>
             </div>
         </div>
     </div>
