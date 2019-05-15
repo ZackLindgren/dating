@@ -45,6 +45,7 @@
                     <label>
                         <strong>Region</strong>
                         <select name="region" class="form-control">
+                            <option value="">Select a Region</option>
                             <repeat group="{{@regions}}" value="{{@currentRegion}}">
                                 <option value="{{@currentRegion}}">{{@currentRegion}}</option>
                             </repeat>
