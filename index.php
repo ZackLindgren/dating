@@ -48,12 +48,14 @@ $f3 ->route('POST /signup', function($f3) {
         $age = $_POST['age'];
         $gender = $_POST['gender'];
         $number = $_POST['number'];
+        $isPremium = !empty($_POST['premium']);
 
         $f3->set('name', $name);
         $f3->set('species', $species);
         $f3->set('age', $age);
         $f3->set('gender', $gender);
         $f3->set('number', $number);
+        $f3->set('isPremium', $isPremium);
 
         if(validForm1())
         {
@@ -62,6 +64,7 @@ $f3 ->route('POST /signup', function($f3) {
             $_SESSION['age'] = $age;
             $_SESSION['gender'] = $gender;
             $_SESSION['number'] = $number;
+            $_SESSION['isPremium'] = $isPremium;
 
             $f3->reroute('signup2');
         }
