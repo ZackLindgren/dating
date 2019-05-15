@@ -37,10 +37,10 @@
                 <p class="border-bottom pb-3">Region: {{ @SESSION.newMember->getRegion() }}</p>
                 <p class="border-bottom pb-3">Seeking: {{ @SESSION.newMember->getSeeking() }}</p>
                 <check if="{{ @SESSION.isPremium }}">
-                    <p>Interests: <repeat group="{{@SESSION.indoor}}" value="{{@indoor}}">
+                    <p>Interests: <repeat group="{{ @SESSION.newMember->getInDoorInterests() }}" value="{{@indoor}}">
                         {{@indoor}},
                     </repeat>
-                        <repeat group="{{@SESSION.outdoor}}" value="{{@outdoor}}">
+                        <repeat group="{{ @SESSION.newMember->getOutDoorInterests() }}" value="{{@outdoor}}">
                             {{@outdoor}},
                         </repeat>
                     </p>
