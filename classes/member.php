@@ -2,43 +2,43 @@
 
 class Member
 {
-    private $_fname;
-    private $_lname;
+    private $_name;
+    private $_species;
     private $_age;
     private $_gender;
-    private $_phone;
+    private $_number;
     private $_email;
-    private $_state;
+    private $_region;
     private $_seeking;
     private $_bio;
 
-    function __construct($fname, $lname, $age, $gender, $phone)
+    function __construct($name, $species, $age, $gender, $number)
     {
-        $this->_fname = $fname;
-        $this->_lname = $lname;
+        $this->_name = $name;
+        $this->_species = $species;
         $this->_age = $age;
         $this->_gender = $gender;
-        $this->_phone = $phone;
+        $this->_number = $number;
     }
 
-    function getFname()
+    function getName()
     {
-        return $this->_fname;
+        return $this->_name;
     }
 
-    function setFname($fname)
+    function setName($name)
     {
-        $this->_fname = $fname;
+        $this->_name = $name;
     }
 
-    function getLname()
+    function getSpecies()
     {
-        return $this->_lname;
+        return $this->_species;
     }
 
-    function setLname($lname)
+    function setSpecies($species)
     {
-        $this->_lname = $lname;
+        $this->_species = $species;
     }
 
     function getAge()
@@ -61,14 +61,14 @@ class Member
         $this->_gender = $gender;
     }
 
-    function getPhone()
+    function getNumber()
     {
-        return $this->_phone;
+        return $this->_number;
     }
 
-    function setPhone($phone)
+    function setNumber($number)
     {
-        $this->_phone = $phone;
+        $this->_number = $number;
     }
 
     function getEmail()
@@ -81,14 +81,14 @@ class Member
         $this->_email = $email;
     }
 
-    function getState()
+    function getRegion()
     {
-        return $this->_state;
+        return $this->_region;
     }
 
-    function setState($state)
+    function setRegion($region)
     {
-        $this->_state = $state;
+        $this->_region = $region;
     }
 
     function getSeeking()

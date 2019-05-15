@@ -7,9 +7,6 @@
  * This page is the controller for the Dating project
  */
 
-// starting the session
-session_start();
-
 //Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -17,6 +14,9 @@ error_reporting(E_ALL);
 //Require the autoload file & model
 require_once('vendor/autoload.php');
 require_once('model/validation.php');
+
+// starting the session
+session_start();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
@@ -59,12 +59,16 @@ $f3 ->route('POST /signup', function($f3) {
 
         if(validForm1())
         {
-            $_SESSION['name'] = $name;
-            $_SESSION['species'] = $species;
-            $_SESSION['age'] = $age;
-            $_SESSION['gender'] = $gender;
-            $_SESSION['number'] = $number;
             $_SESSION['isPremium'] = $isPremium;
+
+            if ($isPremium)
+            {
+                $_SESSION['newMember'] = new PremiumMember($name, $species, $age, $gender, $number);
+            }
+            else
+            {
+                $_SESSION['newMember'] = new Member($name, $species, $age, $gender, $number);
+            }
 
             $f3->reroute('signup2');
         }
