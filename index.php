@@ -95,12 +95,16 @@ $f3 ->route('GET|POST /signup2', function($f3) {
 
         if(validForm2())
         {
-            $_SESSION['email'] = $email;
-            $_SESSION['region'] = $region;
-            $_SESSION['seeking'] = $seeking;
-            $_SESSION['bio'] = $bio;
+            $_SESSION['newMember']->setEmail($email);
+            $_SESSION['newMember']->setRegion($region);
+            $_SESSION['newMember']->setSeeking($seeking);
+            $_SESSION['newMember']->setBio($bio);
 
-            $f3->reroute('signup3');
+            if ($_SESSION['isPremium'])
+            {
+                $f3->reroute('signup3');
+            }
+            $f3->reroute('summary');
         }
     }
 
@@ -121,8 +125,8 @@ $f3 ->route('GET|POST /signup3', function($f3) {
 
         if(validForm3())
         {
-            $_SESSION['indoor'] = $indoor;
-            $_SESSION['outdoor'] = $outdoor;
+            $_SESSION['newMember']->setInDoorInterests($indoor);
+            $_SESSION['newMember']->setOutDoorInterests($outdoor);
 
             $f3->reroute('summary');
         }

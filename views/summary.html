@@ -29,20 +29,22 @@
     <div class="card border-right-0">
         <div class="card-body">
             <div class="border rounded m-3">
-                <p class="border-bottom pt-3 pb-3">Name: {{@SESSION.name}}</p>
-                <p class="border-bottom pb-3">Gender: {{@SESSION.gender}}</p>
-                <p class="border-bottom pb-3">Age: {{@SESSION.age}}</p>
-                <p class="border-bottom pb-3">Phone: {{@SESSION.number}}</p>
-                <p class="border-bottom pb-3">Email: {{@SESSION.email}}</p>
-                <p class="border-bottom pb-3">Region: {{@SESSION.region}}</p>
-                <p class="border-bottom pb-3">Seeking: {{@SESSION.seeking}}</p>
-                <p>Interests: <repeat group="{{@SESSION.indoor}}" value="{{@indoor}}">
+                <p class="border-bottom pt-3 pb-3">Name: {{ @SESSION.newMember->getName() }}</p>
+                <p class="border-bottom pb-3">Gender: {{ @SESSION.newMember->getSpecies() }}</p>
+                <p class="border-bottom pb-3">Age: {{ @SESSION.newMember->getAge() }}</p>
+                <p class="border-bottom pb-3">PokeNav: {{ @SESSION.newMember->getNumber() }}</p>
+                <p class="border-bottom pb-3">Email: {{ @SESSION.newMember->getEmail() }}</p>
+                <p class="border-bottom pb-3">Region: {{ @SESSION.newMember->getRegion() }}</p>
+                <p class="border-bottom pb-3">Seeking: {{ @SESSION.newMember->getSeeking() }}</p>
+                <check if="{{ @SESSION.isPremium }}">
+                    <p>Interests: <repeat group="{{@SESSION.indoor}}" value="{{@indoor}}">
                         {{@indoor}},
                     </repeat>
-                    <repeat group="{{@SESSION.outdoor}}" value="{{@outdoor}}">
-                        {{@outdoor}},
-                    </repeat>
-                </p>
+                        <repeat group="{{@SESSION.outdoor}}" value="{{@outdoor}}">
+                            {{@outdoor}},
+                        </repeat>
+                    </p>
+                </check>
             </div>
         </div>
     </div>
