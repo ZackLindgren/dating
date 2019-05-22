@@ -31,7 +31,7 @@ function validForm1()
     if (!validPhone($f3->get('number')))
     {
         $isValid = false;
-        $f3->set("errors['number']", 'Please enter your PokeNav number');
+        $f3->set("errors['number']", 'Please enter your PokeNav number (Ten numbers, no spaces/special characters)');
     }
 
     return $isValid;
@@ -91,12 +91,6 @@ function validAge($age)
 // returns true if the number is 'valid'
 function validPhone($number)
 {
-    // gets rid of all special characters in the number string
-    // code found on stackoverflow:
-    // https://stackoverflow.com/questions/14114411/remove-all-special-characters-from-a-string
-    $number = str_replace(' ', '-', $number);
-    $number = str_replace('/[^A-Za-z0-9\-]/', '', $number);
-
     // number must be numeric, and must be 10 digits long (ignoring international numbers)
     return ctype_digit($number) && strlen($number) == 10;
 }
