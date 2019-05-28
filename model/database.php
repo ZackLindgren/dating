@@ -82,9 +82,76 @@ class Database
         $statement->bindParam(':region', $newmember->getRegion(), PDO::PARAM_STR);
         $statement->bindParam(':seeking', $newmember->getSeeking(), PDO::PARAM_STR);
         $statement->bindParam(':bio', $newmember->getBio(), PDO::PARAM_STR);
-        $statement->bindParam(':premium', $newmember->getEmail(), PDO::PARAM_INT);
+
+        // check if the member is premium or not
+        $premium = 0;
+        if ($_SESSION['isPremium'])
+        {
+            $premium = 1;
+        }
+
+        $statement->bindParam(':premium', $premium, PDO::PARAM_INT);
 
         //4. Execute the statement
         $statement->execute();
+    }
+
+    function getMembers()
+    {
+        //1. Define the query
+        $sql = "SELECT * FROM member
+                ORDER BY name";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Return the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function getMember($member_id)
+    {
+        //1. Define the query
+        $sql = "SELECT * FROM member
+                WHERE member_id = :id";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':id', $member_id, PDO::PARAM_INT);
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Return the result
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function getInterests($member_id)
+    {
+        //1. Define the query
+        $sql = "SELECT interest, type FROM memberinterest
+                INNER JOIN memberinterest ON member.member_id = memberinterest.member_id
+                WHERE member_id = :id";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':id', $member_id, PDO::PARAM_INT);
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Return the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
